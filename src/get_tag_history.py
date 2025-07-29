@@ -287,7 +287,6 @@ def iter_history_pages(
 
     while url:
         print(f"[DEBUG] Requesting page {page_no}")
-        print(f"[DEBUG] Page url: {url}")
         attempt = 0
         start_req = time.perf_counter()
         while True:
