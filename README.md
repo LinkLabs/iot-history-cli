@@ -1,10 +1,10 @@
-# Get Tag History
-This command-line interface (CLI) tool is designed to retrieve historical tag data from the **Network Asset** and **Client Edge** APIs. It allows users to query the APIs directly from the terminal using a set of defined arguments.
+# IoT History CLI
+This command-line interface (CLI) tool is designed to retrieve historical tag data from the **Network Asset** and **Client Edge** API's. It takes in a site id or tag id as arguments and exports a flattened CSV of the data.
 
 ---
 ## Prerequisites
 Before you begin, ensure you have the following installed on your system:
-- **[Python](https://www.python.org/downloads/)** (this script was tested with python version 3.12, so 3.12+ is recommended)
+- **[Python](https://www.python.org/downloads/)** (this script was tested with Python version 3.12, so 3.12+ is recommended)
 - **[Poetry](https://python-poetry.org/docs/)** (a tool for dependency management and packaging in Python)
 
 ---
@@ -106,8 +106,13 @@ The script uses specific commands to target different APIs and arguments to filt
 ## Troubleshooting
 Here's a list of common issues and their solutions.
 
-- **Issue #1:** `get_tag_history.py: error: argument --tag_id: expected one argument`
-- **Solution:** make sure to escape the dollar sign in your terminal.
+### Poetry setup errors
+**Error message:** `poetry command not found`
+- **Solution:** this could be caused by a number of different issue, but it is most likely due to poetry not being installed or not being added to your system's PATH.
 
-- **Issue #2:** `get_tag_history.py: error: argument --site_id: not allowed with argument --tag_id`
+### Script argument errors
+**Error message:** `get_tag_history.py: error: argument --tag_id: expected one argument`
+- **Solution:** make sure to escape the tag id's dollar sign in your terminal.
+
+**Error message:** `get_tag_history.py: error: argument --site_id: not allowed with argument --tag_id`
 - **Solution:** `--tag_id` and `--site_id` are mutually exclusive.
