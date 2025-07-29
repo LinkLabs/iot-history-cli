@@ -287,6 +287,7 @@ def iter_history_pages(
 
     while url:
         print(f"[DEBUG] Requesting page {page_no}")
+        print(f"[DEBUG] Page url: {url}")
         attempt = 0
         start_req = time.perf_counter()
         while True:
@@ -325,7 +326,7 @@ def iter_history_pages(
             next_page_id = payload.get("nextPageId")
             if not next_page_id:
                 break
-            url = _add_or_replace_query_param(initial_url, "page", str(next_page_id))
+            url = _add_or_replace_query_param(initial_url, "pageId", str(next_page_id))
             page_no += 1
         else:
             break
@@ -436,7 +437,7 @@ def fetch_history_paginated(
             next_page_id = payload.get("nextPageId")
             if not next_page_id:
                 break
-            url = _add_or_replace_query_param(initial_url, "page", str(next_page_id))
+            url = _add_or_replace_query_param(initial_url, "pageId", str(next_page_id))
             page_no += 1
         else:
             break
@@ -495,14 +496,15 @@ def initialize_arguments():
         description="Extract historical data for a site or tag and save it as a flattened CSV file.",
     )
     subject_group = parser.add_mutually_exclusive_group(required=True)
-    subject_group.add_argument("--site_id", help="ID of the site to query")
-    subject_group.add_argument("--tag_id", help="ID of the tag to query")
-    parser.add_argument("--output", "-o", help="Custom output CSV filename")
-    parser.add_argument("--username", help="Username for authentication")
+    subject_group.add_argument("--site_id", help="ID of the site to query (mutually exclusive with --tag_id)")
+    subject_group.add_argument("--tag_id", help="ID of the tag to query (mutually exclusive with --site_id)")
+    parser.add_argument("--output", "-o", metavar="FILENAME", help="Custom output CSV filename")
+    parser.add_argument("--username", help="Link Labs Conductor username for authentication")
     parser.add_argument(
         "--flush_pages",
         type=int,
         default=20,
+        metavar="NUMBER_PAGES",
         help="Number of pages to buffer before writing to CSV (default: 20). Use 0 to write only once at the end.",
     )
     parser.add_argument(
@@ -514,6 +516,7 @@ def initialize_arguments():
     time_end_group = parser.add_mutually_exclusive_group()
     time_end_group.add_argument(
         "--before",
+        metavar="END_DATE",
         help="UTC ISO8601 end timestamp (default: now UTC)",
     )
     time_end_group.add_argument(
@@ -525,11 +528,13 @@ def initialize_arguments():
     range_group = parser.add_mutually_exclusive_group()
     range_group.add_argument(
         "--after",
+        metavar="START_DATE",
         help="UTC ISO8601 start timestamp. Mutually exclusive with --days_back.",
     )
     range_group.add_argument(
         "--days_back",
         type=int,
+        metavar="NUMBER_DAYS",
         help="Number of days before --before to use as the start timestamp (mutually exclusive with --after)",
     )
 

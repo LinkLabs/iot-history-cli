@@ -3,7 +3,7 @@ name = "iot-history-cli"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Link Labs = "noc@link-labs.com"}
+    {name = "Link Labs", email = "noc@link-labs.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
@@ -16,3 +16,7 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry]
+package-mode = false
