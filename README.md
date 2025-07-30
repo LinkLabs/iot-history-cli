@@ -5,11 +5,11 @@ This command-line interface (CLI) tool is designed to retrieve historical tag da
 ## Prerequisites
 Before you begin, ensure you have the following installed on your system:
 - **[Python](https://www.python.org/downloads/)** (this script was tested with Python version 3.12, so 3.12+ is recommended)
-- **[Poetry](https://python-poetry.org/docs/)** (a tool for dependency management and packaging in Python)
+- **[Poetry](https://python-poetry.org/docs/)** (a tool for managing Python dependencies and packaging)
 
 ---
 ## Installation & Setup
-Follow these steps to get the project running on your local machine.
+Follow these steps to get the iot-history-cli running on your local machine.
 
 ### 1. Clone the Repository
 First, clone this repository to your local machine.
@@ -20,7 +20,7 @@ cd iot-history-cli
 ```
 
 ### 2. Install Dependencies
-Second, install the script's dependencies using poetry.
+Second, install the script's dependencies using Poetry.
 
 ```bash
 poetry install
@@ -63,19 +63,19 @@ All commands should be run from the project's root directory.
 
 ### Command Examples
 
-**Example 1: Get the past week's data history from a specific site**
+**Example 1: Get a specific site's tag history from the past week**
 
 ```bash
 poetry run python src/get_tag_history.py --site_id SITE_ID
 ```
 
-**Example 2: Get January's data history from a specific tag**
+**Example 2: Get a specific tag's history from January**
 
 ```bash
 poetry run python src/get_tag_history.py --tag_id TAG_ID --after 2025-01-01T00:00:00Z --before 2025-02-01T00:00:00Z
 ```
 
-**Example 3: Get the past sixty day's data history from a specific tag and output to a custom file**
+**Example 3: Get a specific tag's history from the past 60 days and output to a custom CSV file**
 
 ```bash
 poetry run python src/get_tag_history.py --tag_id TAG_ID --days_back 60 --output FILENAME
@@ -84,7 +84,7 @@ poetry run python src/get_tag_history.py --tag_id TAG_ID --days_back 60 --output
 ---
 ## Argument Reference
 
-The script uses specific commands to target different APIs and arguments to filter the queries.
+Specific arguments to control the script's behavior, such as the output file name, date range, and authentication.
 
 ### Arguments
 
